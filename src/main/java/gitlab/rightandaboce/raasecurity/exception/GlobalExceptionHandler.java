@@ -24,4 +24,10 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
+
+    @ExceptionHandler({EmailNotFoundException.class,
+    TaskCompletedException.class})
+    public ResponseEntity<String> handleIllegalArgumentException(RuntimeException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }
